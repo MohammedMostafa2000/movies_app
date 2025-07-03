@@ -37,6 +37,10 @@ dependencies:
   flutter_screenutil: ^5.9.3
   google_fonts: ^6.2.1
   carousel_slider: ^5.1.1
+  http: ^1.4.0
+  dartz: ^0.10.1
+  provider: ^6.1.5
+  cached_network_image: ^3.4.1
 
 dev_dependencies:
   flutter_test:
