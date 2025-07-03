@@ -7,6 +7,8 @@ class HomeTabViewModel extends ChangeNotifier {
   List<MovieDataModel> genreMoviesList = [];
   String errorForAvialableMovies = '';
   String errorForGenreMovies = '';
+  int categoryIndex = 0;
+
   void getAvailableMovies() async {
     var result = await ApiServices.getMovies(
       sortedBy: 'year',
@@ -23,8 +25,8 @@ class HomeTabViewModel extends ChangeNotifier {
     );
   }
 
-  void getActionMovies() async {
-    var result = await ApiServices.getMovies(genre: 'action', limit: 50);
+  void getMoviesBasedOnGenre({String genre = ''}) async {
+    var result = await ApiServices.getMovies(genre: genre, limit: 30);
     result.fold(
       (left) {
         genreMoviesList = left;
@@ -35,5 +37,12 @@ class HomeTabViewModel extends ChangeNotifier {
         notifyListeners();
       },
     );
+  }
+
+  void incrementCategoryIndex() {
+    categoryIndex++;
+    if (categoryIndex > 19) {
+      categoryIndex = 0;
+    }
   }
 }
