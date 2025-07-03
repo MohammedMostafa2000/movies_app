@@ -40,7 +40,7 @@ class _HomeState extends State<Home> {
   ];
   int _selectedIndex = 0;
   late HomeTabViewModel homeTabViewModel;
-  bool isMoreTabbed = false;
+  bool isMoreTapped = false;
   String toggleLabel = 'See More  ->';
 
   @override
@@ -133,8 +133,8 @@ class _HomeState extends State<Home> {
                             InkWell(
                               onTap: () {
                                 setState(() {
-                                  isMoreTabbed = !isMoreTabbed;
-                                  toggleLabel = isMoreTabbed ? 'See Less' : 'See More  ->';
+                                  isMoreTapped = !isMoreTapped;
+                                  toggleLabel = isMoreTapped ? 'See Less' : 'See More  ->';
                                 });
                               },
                               child: Text(
@@ -147,7 +147,7 @@ class _HomeState extends State<Home> {
                       ),
                     ),
                     SliverToBoxAdapter(child: SizedBox(height: 12.h)),
-                    isMoreTabbed
+                    isMoreTapped
                         ? SliverToBoxAdapter(
                             child: GridView.builder(
                               padding: REdgeInsets.symmetric(horizontal: 8),
