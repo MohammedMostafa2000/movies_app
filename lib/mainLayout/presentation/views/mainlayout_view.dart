@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_app/mainLayout/presentation/viewModels/home_tab_view_model.dart';
+import 'package:movies_app/mainLayout/presentation/viewModels/search_tab_view_model.dart';
 import 'package:movies_app/mainLayout/presentation/views/tabs/home.dart';
 import 'package:movies_app/mainLayout/presentation/views/tabs/search.dart';
 import 'package:provider/provider.dart';
@@ -24,6 +25,7 @@ class _MainlayoutViewState extends State<MainlayoutView> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => HomeTabViewModel()),
+        ChangeNotifierProvider(create: (context) => SearchTabViewModel()),
       ],
       child: Scaffold(
         body: tabs[selectedIndex],

@@ -1,0 +1,32 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+class CustomGridViewBuilder extends StatelessWidget {
+  const CustomGridViewBuilder({
+    super.key,
+    required this.count,
+    required this.crossAxisCount,
+    required this.childAspectRatio,
+    required this.itemBuilder,
+  });
+  final int count;
+  final int crossAxisCount;
+  final double childAspectRatio;
+  final Widget? Function(BuildContext, int) itemBuilder;
+  @override
+  Widget build(BuildContext context) {
+    return GridView.builder(
+      padding: REdgeInsets.symmetric(horizontal: 8),
+      physics: NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      itemCount: count,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: crossAxisCount,
+        mainAxisSpacing: 8.h,
+        crossAxisSpacing: 8.w,
+        childAspectRatio: childAspectRatio,
+      ),
+      itemBuilder: itemBuilder,
+    );
+  }
+}
