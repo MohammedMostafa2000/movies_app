@@ -6,6 +6,24 @@ import 'package:movies_app/core/colors_manager.dart';
 class ThemeManager {
   static ThemeData light = ThemeData();
   static ThemeData dark = ThemeData(
+      tabBarTheme: TabBarTheme(
+        tabAlignment: TabAlignment.start,
+        labelPadding: REdgeInsets.only(right: 8),
+        labelColor: ColorsManager.black121312,
+        unselectedLabelColor: ColorsManager.orange,
+        indicatorColor: Colors.transparent,
+        dividerColor: Colors.transparent,
+        labelStyle: GoogleFonts.inter(
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+          color: ColorsManager.black121312,
+        ),
+        unselectedLabelStyle: GoogleFonts.inter(
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+          color: ColorsManager.orange,
+        ),
+      ),
       inputDecorationTheme: InputDecorationTheme(
         hintStyle: GoogleFonts.roboto(
           fontSize: 16,
