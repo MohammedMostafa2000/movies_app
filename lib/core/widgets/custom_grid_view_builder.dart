@@ -22,8 +22,8 @@ class CustomGridViewBuilder extends StatelessWidget {
       itemCount: count,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: crossAxisCount,
-        mainAxisSpacing: 8.h,
-        crossAxisSpacing: 8.w,
+        mainAxisSpacing: 12.h,
+        crossAxisSpacing: 12.w,
         childAspectRatio: childAspectRatio,
       ),
       itemBuilder: itemBuilder,
