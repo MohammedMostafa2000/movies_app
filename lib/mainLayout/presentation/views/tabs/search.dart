@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movies_app/core/assets_manager.dart';
 import 'package:movies_app/core/colors_manager.dart';
 import 'package:movies_app/core/widgets/custom_grid_view_builder.dart';
 import 'package:movies_app/core/widgets/movie_card.dart';
@@ -61,9 +62,9 @@ class _SearchState extends State<Search> {
                     : SizedBox(
                         height: 750.h,
                         child: Center(
-                          child: Text(
-                            'No Movies Available',
-                            style: Theme.of(context).textTheme.labelMedium,
+                          child: Image.asset(
+                            AssetsManager.popcorn,
+                            height: 124.h,
                           ),
                         ),
                       ),
