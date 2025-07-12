@@ -57,13 +57,28 @@ class ThemeManager {
         backgroundColor: ColorsManager.black282A28,
       ),
       textTheme: TextTheme(
+        bodyLarge: GoogleFonts.roboto(
+          color: ColorsManager.white,
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+        ),
         labelMedium: GoogleFonts.roboto(
           color: ColorsManager.white,
           fontSize: 20,
           fontWeight: FontWeight.w400,
         ),
+        bodyMedium: GoogleFonts.roboto(
+          color: ColorsManager.gray,
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+        ),
         labelSmall: GoogleFonts.roboto(
           color: ColorsManager.orange,
+          fontSize: 16,
+          fontWeight: FontWeight.w400,
+        ),
+        bodySmall: GoogleFonts.roboto(
+          color: ColorsManager.white,
           fontSize: 16,
           fontWeight: FontWeight.w400,
         ),

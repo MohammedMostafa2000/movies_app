@@ -2,9 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_app/config/theme_manager.dart';
 import 'package:movies_app/core/routes_manager.dart';
+import 'package:movies_app/mainLayout/presentation/viewModels/movie_details_view_model.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MoviesApp());
+  runApp(MultiProvider(
+    providers: [ChangeNotifierProvider(create: (context) => MovieDetailsViewModel())],
+    child: MoviesApp(),
+  ));
 }
 
 class MoviesApp extends StatelessWidget {
