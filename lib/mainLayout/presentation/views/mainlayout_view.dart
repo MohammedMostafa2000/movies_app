@@ -20,7 +20,7 @@ class _MainlayoutViewState extends State<MainlayoutView> {
   final List<Widget> tabs = [
     Home(),
     Search(),
-    Browse()
+    Browse(),
   ];
 
   @override

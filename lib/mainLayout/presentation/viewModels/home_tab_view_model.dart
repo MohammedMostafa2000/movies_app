@@ -8,6 +8,7 @@ class HomeTabViewModel extends ChangeNotifier {
   String errorForAvialableMovies = '';
   String errorForGenreMovies = '';
   int categoryIndex = 0;
+  bool isLoading = true;
 
   void getAvailableMovies() async {
     var result = await ApiServices.getMovies(
@@ -16,10 +17,12 @@ class HomeTabViewModel extends ChangeNotifier {
     result.fold(
       (left) {
         availableMoviesList = left;
+        isLoading = false;
         notifyListeners();
       },
       (right) {
         errorForAvialableMovies = right;
+        isLoading = false;
         notifyListeners();
       },
     );

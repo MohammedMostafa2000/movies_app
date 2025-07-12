@@ -110,6 +110,7 @@ class _BrowseState extends State<Browse> {
                         ),
                       )
                     : CustomGridViewBuilder(
+                      padding: REdgeInsets.symmetric(horizontal: 8),
                         count: viewModel.genreMoviesList.length,
                         crossAxisCount: 2,
                         childAspectRatio: 0.7,

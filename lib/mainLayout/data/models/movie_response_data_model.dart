@@ -1,18 +1,18 @@
 import 'package:movies_app/mainLayout/data/models/movie_data_model.dart';
 
-class ApiResponseDataModel {
+class MovieResponseDataModel {
   final String status;
   final String statusMessage;
   final List<MovieDataModel> movies;
 
-  ApiResponseDataModel({
+  MovieResponseDataModel({
     required this.status,
     required this.statusMessage,
     required this.movies,
   });
 
-  factory ApiResponseDataModel.fromJson(Map<String, dynamic> json) {
-    return ApiResponseDataModel(
+  factory MovieResponseDataModel.fromJson(Map<String, dynamic> json) {
+    return MovieResponseDataModel(
       status: json['status'] as String,
       statusMessage: json['status_message'] as String,
       movies: (json['data']['movies'] as List)

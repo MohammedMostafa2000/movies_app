@@ -50,6 +50,7 @@ class _SearchState extends State<Search> {
                 SizedBox(height: 12.h),
                 textFormFieldData.isNotEmpty
                     ? CustomGridViewBuilder(
+                      padding: REdgeInsets.symmetric(horizontal: 8),
                         count: viewModel.moviesList.length,
                         crossAxisCount: 2,
                         childAspectRatio: 0.7,

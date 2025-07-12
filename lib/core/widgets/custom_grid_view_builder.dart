@@ -8,15 +8,17 @@ class CustomGridViewBuilder extends StatelessWidget {
     required this.crossAxisCount,
     required this.childAspectRatio,
     required this.itemBuilder,
+    required this.padding,
   });
   final int count;
   final int crossAxisCount;
   final double childAspectRatio;
   final Widget? Function(BuildContext, int) itemBuilder;
+  final EdgeInsetsGeometry? padding;
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      padding: REdgeInsets.symmetric(horizontal: 8),
+      padding: padding,
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemCount: count,
