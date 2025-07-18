@@ -6,9 +6,13 @@ class CustomElevatedButton extends StatelessWidget {
     super.key,
     required this.color,
     required this.title,
+    this.titleStyle,
+    this.onPressed,
   });
   final Color color;
   final String title;
+  final TextStyle? titleStyle;
+  final void Function()? onPressed;
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
@@ -17,12 +21,12 @@ class CustomElevatedButton extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r)),
         backgroundColor: color,
       ),
-      onPressed: () {},
+      onPressed: onPressed,
       child: Text(
         title,
-        style: Theme.of(context).textTheme.labelMedium!.copyWith(
-              fontWeight: FontWeight.bold,
-            ),
+        style: titleStyle, // Theme.of(context).textTheme.labelMedium!.copyWith(
+        //       fontWeight: FontWeight.bold,
+        //     ),
       ),
     );
   }
