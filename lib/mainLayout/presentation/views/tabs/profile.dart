@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -44,9 +43,11 @@ class _ProfileState extends State<Profile> {
 
   Future<void> _loadProfile() async {
     token = await SharedPrefs.getToken();
-    final profileVM = Provider.of<ProfileViewModel>(context, listen: false);
-    profileVM.getProfileDetails(token: token);
-    profileVM.getFavoritesList(token: token);
+    if (mounted) {
+      final profileVM = Provider.of<ProfileViewModel>(context, listen: false);
+      profileVM.getProfileDetails(token: token);
+      profileVM.getFavoritesList(token: token);
+    }
   }
 
   @override
@@ -138,11 +139,7 @@ class _ProfileState extends State<Profile> {
                                       flex: 2,
                                       child: CustomElevatedButton(
                                         titleStyle: Theme.of(context).textTheme.titleMedium,
-                                        onPressed: () {
-                                          viewModel.user?.avatarId != null
-                                              ? log(viewModel.user!.avatarId.toString())
-                                              : log('Avatar ID is null');
-                                        },
+                                        onPressed: () {},
                                         color: ColorsManager.orange,
                                         title: 'Edit Profile',
                                       ),

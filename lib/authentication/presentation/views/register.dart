@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -87,7 +86,6 @@ class _RegisterState extends State<Register> {
                         setState(() {
                           avatarId = index;
                         });
-                        log(index.toString());
                       },
                       enlargeCenterPage: true,
                       enlargeFactor: 0.52,
@@ -195,8 +193,6 @@ class _RegisterState extends State<Register> {
             message: viewModel.message, negActionTitle: "Cancel", negAction: () {});
       }
     }
-
-    log(viewModel.message.toString());
   }
 }
 

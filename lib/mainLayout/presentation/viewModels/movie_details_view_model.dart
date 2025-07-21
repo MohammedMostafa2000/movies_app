@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:movies_app/mainLayout/data/api_services.dart';
 import 'package:movies_app/mainLayout/data/models/movie_data_model.dart';
@@ -89,7 +87,6 @@ class MovieDetailsViewModel extends ChangeNotifier {
       isMovieFavorite = false;
       notifyListeners();
     }
-    log(isMovieFavorite.toString());
   }
 
   Future<void> toggleFavoriteStatus({

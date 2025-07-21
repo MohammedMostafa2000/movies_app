@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import 'package:http/http.dart' as http;
 import 'package:movies_app/mainLayout/data/models/movie_response_data_model.dart';
@@ -69,8 +68,6 @@ class ApiServices {
           'Content-Type': 'application/json',
         },
       );
-      log('RESPONSE BODY: ${response.body}');
-
       final json = jsonDecode(response.body);
       return ProfileResponse.fromJson(json);
     } on Exception catch (exception) {

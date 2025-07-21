@@ -22,9 +22,4 @@ class LoginViewModel extends ChangeNotifier {
     }
     notifyListeners();
   }
-
-  // Future<void> getToken() async {
-  //   token = await SharedPrefs.getToken();
-  //   notifyListeners();
-  // }
 }

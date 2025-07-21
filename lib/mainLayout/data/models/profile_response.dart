@@ -6,14 +6,12 @@ class ProfileResponse {
   String? error;
   int? statusCode;
   dynamic data;
-  // List<MovieDataModel>? favoritesList;
 
   ProfileResponse({
     required this.message,
     this.error,
     this.statusCode,
     this.data,
-    // this.favoritesList,
   });
   factory ProfileResponse.fromJson(Map<String, dynamic> json) {
     dynamic rawData = json['data'];
