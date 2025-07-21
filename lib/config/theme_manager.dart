@@ -10,9 +10,7 @@ class ThemeManager {
       centerTitle: true,
       foregroundColor: ColorsManager.orange,
       backgroundColor: ColorsManager.black121312,
-      iconTheme: IconThemeData(
-        color: ColorsManager.orange
-      ),
+      iconTheme: IconThemeData(color: ColorsManager.orange),
     ),
     tabBarTheme: TabBarTheme(
       tabAlignment: TabAlignment.start,
@@ -67,6 +65,11 @@ class ThemeManager {
       backgroundColor: ColorsManager.black282A28,
     ),
     textTheme: TextTheme(
+      displayLarge: GoogleFonts.roboto(
+        color: ColorsManager.white,
+        fontSize: 36,
+        fontWeight: FontWeight.bold,
+      ),
       bodyLarge: GoogleFonts.roboto(
         color: ColorsManager.white,
         fontSize: 24,
@@ -98,6 +101,5 @@ class ThemeManager {
         fontWeight: FontWeight.w400,
       ),
     ),
-   
   );
 }

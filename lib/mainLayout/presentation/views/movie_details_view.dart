@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movies_app/authentication/data/shared_prefs.dart';
 import 'package:movies_app/core/assets_manager.dart';
 import 'package:movies_app/core/colors_manager.dart';
 import 'package:movies_app/core/widgets/cast_widget.dart';
@@ -24,7 +25,8 @@ class MovieDetailsView extends StatefulWidget {
 
 class _MovieDetailsViewState extends State<MovieDetailsView> {
   late MovieDetailsViewModel movieDetailsViewModel;
-
+  bool isFavorite = false;
+  String token = '';
   @override
   void initState() {
     loadMovieDetails();
@@ -33,6 +35,9 @@ class _MovieDetailsViewState extends State<MovieDetailsView> {
 
   loadMovieDetails() async {
     movieDetailsViewModel = Provider.of<MovieDetailsViewModel>(context, listen: false);
+    token = await SharedPrefs.getToken();
+    movieDetailsViewModel.checkFavoriteMovies(movieId: widget.movieId, token: token);
+
     movieDetailsViewModel.getMovieDetails(movieId: widget.movieId);
     movieDetailsViewModel.getMovieSuggestions(movieId: widget.movieId);
   }
@@ -64,7 +69,7 @@ class _MovieDetailsViewState extends State<MovieDetailsView> {
                       child: Stack(
                         children: [
                           CachedNetworkImage(
-                            imageUrl: viewModel.movie!.largeCoverImage,
+                            imageUrl: viewModel.movie?.largeCoverImage ?? '',
                             errorWidget: (context, url, error) => Icon(Icons.error),
                           ),
                           Container(
@@ -92,7 +97,7 @@ class _MovieDetailsViewState extends State<MovieDetailsView> {
                                     children: [
                                       IconButton(
                                         onPressed: () {
-                                          Navigator.pop(context);
+                                          Navigator.pop(context, true);
                                         },
                                         icon: Icon(
                                           Icons.arrow_back_ios_new_rounded,
@@ -101,10 +106,14 @@ class _MovieDetailsViewState extends State<MovieDetailsView> {
                                         ),
                                       ),
                                       IconButton(
-                                        onPressed: () {},
+                                        onPressed: () async {
+                                          await viewModel.toggleFavoriteStatus(token: token);
+                                        },
                                         icon: Icon(
                                           Icons.bookmark_outlined,
-                                          color: ColorsManager.white,
+                                          color: viewModel.isMovieFavorite
+                                              ? ColorsManager.orange
+                                              : ColorsManager.white,
                                           size: 34.sp,
                                         ),
                                       )
@@ -221,7 +230,7 @@ class _MovieDetailsViewState extends State<MovieDetailsView> {
                             padding: EdgeInsets.zero,
                             shrinkWrap: true,
                             physics: NeverScrollableScrollPhysics(),
-                            itemCount: viewModel.movie!.cast.length,
+                            itemCount: viewModel.movie?.cast.length ?? 0,
                             itemBuilder: (context, index) =>
                                 CastWidget(castDataModel: viewModel.movie!.cast[index]),
                           ),
@@ -232,7 +241,7 @@ class _MovieDetailsViewState extends State<MovieDetailsView> {
                           SizedBox(height: 16.h),
                           GridView.builder(
                             padding: REdgeInsets.only(bottom: 40),
-                            itemCount: viewModel.movie!.genres.length,
+                            itemCount: viewModel.movie?.genres.length ?? 0,
                             shrinkWrap: true,
                             physics: NeverScrollableScrollPhysics(),
                             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

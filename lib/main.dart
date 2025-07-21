@@ -5,6 +5,7 @@ import 'package:movies_app/authentication/presentation/viewModels/register_view_
 import 'package:movies_app/config/theme_manager.dart';
 import 'package:movies_app/core/routes_manager.dart';
 import 'package:movies_app/mainLayout/presentation/viewModels/movie_details_view_model.dart';
+import 'package:movies_app/mainLayout/presentation/viewModels/profile_view_model.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -13,6 +14,7 @@ void main() {
       ChangeNotifierProvider(create: (context) => MovieDetailsViewModel()),
       ChangeNotifierProvider(create: (context) => RegisterViewModel()),
       ChangeNotifierProvider(create: (context) => LoginViewModel()),
+      ChangeNotifierProvider(create: (context) => ProfileViewModel()),
     ],
     child: MoviesApp(),
   ));

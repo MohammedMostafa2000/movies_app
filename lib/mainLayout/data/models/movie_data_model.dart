@@ -69,7 +69,7 @@ class MovieDataModel {
 
   factory MovieDataModel.fromJson(Map<String, dynamic> json) {
     return MovieDataModel(
-      id: json['id'] ?? 0,
+      id: json['id'] ?? (json['movieId'] != null ? int.tryParse(json['movieId']) : null) ?? 0,
       url: json['url'] ?? '',
       imdbCode: json['imdb_code'] ?? '',
       title: json['title'] ?? '',
@@ -94,7 +94,7 @@ class MovieDataModel {
       backgroundImageOriginal: json['background_image_original'] ?? '',
       smallCoverImage: json['small_cover_image'] ?? '',
       mediumCoverImage: json['medium_cover_image'] ?? '',
-      largeCoverImage: json['large_cover_image'] ?? '',
+      largeCoverImage: json['large_cover_image'] ?? json['imageURL'] ?? '',
       mediumScreenshotImage1: json['medium_screenshot_image1'] ?? '',
       mediumScreenshotImage2: json['medium_screenshot_image2'] ?? '',
       mediumScreenshotImage3: json['medium_screenshot_image3'] ?? '',
