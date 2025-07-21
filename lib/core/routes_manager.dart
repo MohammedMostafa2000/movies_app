@@ -21,8 +21,9 @@ class RoutesManager {
         );
       case loginView:
         return MaterialPageRoute(builder: (context) => Login());
-         case registerView:
+      case registerView:
         return MaterialPageRoute(builder: (context) => Register());
+
       default:
         return null;
     }

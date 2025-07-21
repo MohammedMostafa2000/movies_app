@@ -5,6 +5,7 @@ import 'package:movies_app/mainLayout/presentation/viewModels/home_tab_view_mode
 import 'package:movies_app/mainLayout/presentation/viewModels/search_tab_view_model.dart';
 import 'package:movies_app/mainLayout/presentation/views/tabs/browse.dart';
 import 'package:movies_app/mainLayout/presentation/views/tabs/home.dart';
+import 'package:movies_app/mainLayout/presentation/views/tabs/profile.dart';
 import 'package:movies_app/mainLayout/presentation/views/tabs/search.dart';
 import 'package:provider/provider.dart';
 
@@ -17,11 +18,7 @@ class MainlayoutView extends StatefulWidget {
 
 class _MainlayoutViewState extends State<MainlayoutView> {
   int selectedIndex = 0;
-  final List<Widget> tabs = [
-    Home(),
-    Search(),
-    Browse(),
-  ];
+  final List<Widget> tabs = [Home(), Search(), Browse(), Profile()];
 
   @override
   Widget build(BuildContext context) {

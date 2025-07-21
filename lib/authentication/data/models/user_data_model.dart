@@ -7,12 +7,12 @@ class UserDataModel {
   final int? avatarId;
 
   UserDataModel({
-     this.name,
-     this.email,
-     this.password,
-     this.confirmPassword,
-     this.phone,
-     this.avatarId,
+    this.name,
+    this.email,
+    this.password,
+    this.confirmPassword,
+    this.phone,
+    this.avatarId,
   });
 
   Map<String, dynamic> toJson() {
@@ -24,5 +24,16 @@ class UserDataModel {
       'phone': phone,
       'avaterId': avatarId,
     };
+  }
+
+  factory UserDataModel.fromJson(Map<String, dynamic> json) {
+    return UserDataModel(
+      avatarId: json['avaterId'],
+      name: json['name'],
+      email: json['email'],
+      password: json['password'],
+      confirmPassword: json['confirmPassword'],
+      phone: json['phone'],
+    );
   }
 }

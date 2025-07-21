@@ -1,9 +1,11 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import 'package:http/http.dart' as http;
 import 'package:movies_app/mainLayout/data/models/movie_response_data_model.dart';
 import 'package:movies_app/mainLayout/data/models/movie_data_model.dart';
 import 'package:movies_app/mainLayout/data/models/movie_details_response.dart';
+import 'package:movies_app/mainLayout/data/models/profile_response.dart';
 
 class ApiServices {
   static Future<Either<List<MovieDataModel>, String>> getMovies(
@@ -54,6 +56,111 @@ class ApiServices {
       }
     } on Exception catch (e) {
       return right(e.toString());
+    }
+  }
+
+  static Future<ProfileResponse> getProfileDetails({required String token}) async {
+    try {
+      Uri url = Uri.parse('https://route-movie-apis.vercel.app/profile');
+      final response = await http.get(
+        url,
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json',
+        },
+      );
+      log('RESPONSE BODY: ${response.body}');
+
+      final json = jsonDecode(response.body);
+      return ProfileResponse.fromJson(json);
+    } on Exception catch (exception) {
+      return ProfileResponse(message: exception.toString());
+    }
+  }
+
+  static Future<ProfileResponse> addMovieToFavorite({
+    required String token,
+    required String movieId,
+    required String name,
+    required double rating,
+    required String imageURL,
+    required String year,
+  }) async {
+    try {
+      Uri url = Uri.parse('https://route-movie-apis.vercel.app/favorites/add');
+      final response = await http.post(
+        url,
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode({
+          "movieId": movieId,
+          "name": name,
+          "rating": rating,
+          "imageURL": imageURL,
+          "year": year,
+        }),
+      );
+      final json = jsonDecode(response.body);
+      return ProfileResponse.fromJson(json);
+    } on Exception catch (exception) {
+      return ProfileResponse(message: exception.toString());
+    }
+  }
+
+  static Future<ProfileResponse> deleteMovieFromFavorite({
+    required String token,
+    required String movieId,
+  }) async {
+    try {
+      Uri url = Uri.parse('https://route-movie-apis.vercel.app/favorites/remove/$movieId');
+      final response = await http.delete(
+        url,
+        headers: {
+          'Authorization': 'Bearer $token',
+        },
+      );
+      final json = jsonDecode(response.body);
+      return ProfileResponse.fromJson(json);
+    } on Exception catch (exception) {
+      return ProfileResponse(message: exception.toString());
+    }
+  }
+
+  static Future<ProfileResponse> getAllFavoriteMovies({required String token}) async {
+    try {
+      Uri url = Uri.parse('https://route-movie-apis.vercel.app/favorites/all');
+      final response = await http.get(
+        url,
+        headers: {
+          'Authorization': 'Bearer $token',
+        },
+      );
+      final json = jsonDecode(response.body);
+      return ProfileResponse.fromJson(json);
+    } on Exception catch (exception) {
+      return ProfileResponse(message: exception.toString());
+    }
+  }
+
+  static Future<ProfileResponse> checkFavoriteMovies({
+    required String token,
+    required int movieId,
+  }) async {
+    try {
+      Uri url =
+          Uri.parse('https://route-movie-apis.vercel.app/favorites/is-favorite/$movieId');
+      final response = await http.get(
+        url,
+        headers: {
+          'Authorization': 'Bearer $token',
+        },
+      );
+      final json = jsonDecode(response.body);
+      return ProfileResponse.fromJson(json);
+    } on Exception catch (exception) {
+      return ProfileResponse(message: exception.toString());
     }
   }
 }
