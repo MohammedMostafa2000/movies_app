@@ -8,10 +8,14 @@ import 'package:movies_app/mainLayout/data/models/profile_response.dart';
 
 class ApiServices {
   static Future<Either<List<MovieDataModel>, String>> getMovies(
-      {String genre = '', int limit = 10, String sortedBy = '', String query = ''}) async {
+      {String genre = '',
+      int limit = 10,
+      String sortedBy = '',
+      String query = '',
+      int page = 1}) async {
     try {
       final url = Uri.parse(
-          'https://yts.mx/api/v2/list_movies.json?genre=$genre&limit=$limit&sort_by=$sortedBy&query_term=$query');
+          'https://yts.mx/api/v2/list_movies.json?genre=$genre&limit=$limit&page=$page&sort_by=$sortedBy&query_term=$query');
       final response = await http.get(url);
       if (response.statusCode == 200) {
         final json = jsonDecode(response.body);
@@ -146,8 +150,7 @@ class ApiServices {
     required int movieId,
   }) async {
     try {
-      Uri url =
-          Uri.parse('https://route-movie-apis.vercel.app/favorites/is-favorite/$movieId');
+      Uri url = Uri.parse('https://route-movie-apis.vercel.app/favorites/is-favorite/$movieId');
       final response = await http.get(
         url,
         headers: {

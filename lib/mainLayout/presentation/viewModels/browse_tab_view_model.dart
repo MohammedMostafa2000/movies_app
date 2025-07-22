@@ -7,12 +7,12 @@ class BrowseTabViewModel extends ChangeNotifier {
   String errorForGenreMovies = '';
   bool isLoading = true;
 
-  void getMoviesBasedOnGenre({String genre = ''}) async {
+  void getMoviesBasedOnGenre({String genre = '', int page = 1}) async {
     isLoading = true;
-    var result = await ApiServices.getMovies(genre: genre, limit: 20);
+    var result = await ApiServices.getMovies(genre: genre, limit: 20, page: page);
     result.fold(
       (left) {
-        genreMoviesList = left;
+        genreMoviesList.addAll(left);
         isLoading = false;
         notifyListeners();
       },

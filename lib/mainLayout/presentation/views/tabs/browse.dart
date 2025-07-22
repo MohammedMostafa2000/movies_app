@@ -39,11 +39,26 @@ class _BrowseState extends State<Browse> {
   ];
 
   int selectedIndex = 0;
+  String currentGenre = '';
+  int pageNumber = 1;
 
+  ScrollController scrollController = ScrollController();
   @override
   void initState() {
     browseTabViewModel = Provider.of<BrowseTabViewModel>(context, listen: false);
-    browseTabViewModel.getMoviesBasedOnGenre(genre: movieCategories[0]);
+    currentGenre = movieCategories[0];
+    browseTabViewModel.getMoviesBasedOnGenre(genre: currentGenre, page: pageNumber);
+    scrollController.addListener(() {
+      if (scrollController.position.atEdge &&
+          scrollController.position.pixels != 0 &&
+          !browseTabViewModel.isLoading) {
+        pageNumber++;
+        browseTabViewModel.getMoviesBasedOnGenre(
+          genre: currentGenre,
+          page: pageNumber,
+        );
+      }
+    });
     super.initState();
   }
 
@@ -57,70 +72,74 @@ class _BrowseState extends State<Browse> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
-          child: Consumer<BrowseTabViewModel>(
-            builder: (context, viewModel, child) => Column(
-              children: [
-                DefaultTabController(
-                  length: movieCategories.length,
-                  child: TabBar(
-                    padding: REdgeInsets.symmetric(
-                      horizontal: 8,
-                      vertical: 0,
-                    ),
-                    physics: BouncingScrollPhysics(),
-                    onTap: (index) {
-                      setState(() {
-                        selectedIndex = index;
-                      });
-                      viewModel.getMoviesBasedOnGenre(genre: movieCategories[selectedIndex]);
-                    },
-                    isScrollable: true,
-                    automaticIndicatorColorAdjustment: false,
-                    tabs: List.generate(
-                      movieCategories.length,
-                      (index) {
-                        final isSelected = index == selectedIndex;
-                        return Container(
-                          padding: REdgeInsets.all(12),
-                          decoration: BoxDecoration(
-                            color: isSelected ? ColorsManager.orange : Colors.transparent,
-                            borderRadius: BorderRadius.circular(16.r),
-                            border: Border.all(
-                              color: ColorsManager.orange,
-                              width: 2.w,
-                            ),
-                          ),
-                          alignment: Alignment.center,
-                          child: Text(
-                            movieCategories[index],
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                ),
-                SizedBox(height: 15.h),
-                viewModel.isLoading
-                    ? SizedBox(
-                        height: 700.h,
-                        child: Center(
-                          child: CircularProgressIndicator(color: ColorsManager.orange),
+        child: Column(
+          children: [
+            DefaultTabController(
+              length: movieCategories.length,
+              child: TabBar(
+                padding: REdgeInsets.symmetric(horizontal: 8),
+                physics: BouncingScrollPhysics(),
+                onTap: (index) {
+                  setState(() {
+                    selectedIndex = index;
+                    currentGenre = movieCategories[selectedIndex];
+                    pageNumber = 1;
+                  });
+
+                  browseTabViewModel.genreMoviesList.clear();
+                  browseTabViewModel.getMoviesBasedOnGenre(
+                    genre: currentGenre,
+                    page: pageNumber,
+                  );
+                },
+                isScrollable: true,
+                automaticIndicatorColorAdjustment: false,
+                tabs: List.generate(
+                  movieCategories.length,
+                  (index) {
+                    final isSelected = index == selectedIndex;
+                    return Container(
+                      padding: REdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: isSelected ? ColorsManager.orange : Colors.transparent,
+                        borderRadius: BorderRadius.circular(16.r),
+                        border: Border.all(
+                          color: ColorsManager.orange,
+                          width: 2.w,
                         ),
-                      )
-                    : CustomGridViewBuilder(
-                      padding: REdgeInsets.symmetric(horizontal: 8),
-                        count: viewModel.genreMoviesList.length,
-                        crossAxisCount: 2,
-                        childAspectRatio: 0.7,
-                        itemBuilder: (context, index) {
-                          return MovieCard(movieDataModel: viewModel.genreMoviesList[index]);
-                        },
                       ),
-              ],
+                      alignment: Alignment.center,
+                      child: Text(movieCategories[index]),
+                    );
+                  },
+                ),
+              ),
             ),
-          ),
+            SizedBox(height: 15.h),
+            Expanded(
+              child: Consumer<BrowseTabViewModel>(
+                builder: (context, viewModel, child) {
+                  if (viewModel.isLoading && viewModel.genreMoviesList.isEmpty) {
+                    return Center(
+                      child: CircularProgressIndicator(color: ColorsManager.orange),
+                    );
+                  }
+                  return CustomGridViewBuilder(
+                    controller: scrollController,
+                    padding: REdgeInsets.symmetric(horizontal: 8),
+                    count: viewModel.genreMoviesList.length,
+                    crossAxisCount: 2,
+                    childAspectRatio: 0.7,
+                    itemBuilder: (context, index) {
+                      return MovieCard(
+                        movieDataModel: viewModel.genreMoviesList[index],
+                      );
+                    },
+                  );
+                },
+              ),
+            ),
+          ],
         ),
       ),
     );

@@ -32,7 +32,7 @@ class MoviesApp extends StatelessWidget {
       builder: (context, child) => MaterialApp(
         debugShowCheckedModeBanner: false,
         onGenerateRoute: RoutesManager.goRoute,
-        initialRoute: RoutesManager.loginView,
+        initialRoute: RoutesManager.mainLayoutView,
         locale: Locale('en'),
         theme: ThemeManager.light,
         darkTheme: ThemeManager.dark,

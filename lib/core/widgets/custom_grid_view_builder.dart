@@ -9,18 +9,21 @@ class CustomGridViewBuilder extends StatelessWidget {
     required this.childAspectRatio,
     required this.itemBuilder,
     required this.padding,
+    this.controller,
   });
   final int count;
   final int crossAxisCount;
   final double childAspectRatio;
   final Widget? Function(BuildContext, int) itemBuilder;
   final EdgeInsetsGeometry? padding;
+  final ScrollController? controller;
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
+      controller: controller,
       padding: padding,
-      physics: NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
+      // physics: NeverScrollableScrollPhysics(),
+      shrinkWrap: false,
       itemCount: count,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: crossAxisCount,
