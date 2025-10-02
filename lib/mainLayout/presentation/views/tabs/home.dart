@@ -49,7 +49,8 @@ class _HomeState extends State<Home> {
     super.initState();
     homeTabViewModel = Provider.of<HomeTabViewModel>(context, listen: false);
     homeTabViewModel.getAvailableMovies();
-    homeTabViewModel.getMoviesBasedOnGenre(genre: movieCategories[homeTabViewModel.categoryIndex]);
+    homeTabViewModel.getMoviesBasedOnGenre(
+        genre: movieCategories[homeTabViewModel.categoryIndex]);
     movieCategory = movieCategories[homeTabViewModel.categoryIndex];
   }
 
@@ -64,7 +65,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Consumer<HomeTabViewModel>(
         builder: (context, viewModel, child) => viewModel.isLoading
-            ? Center(
+            ? const Center(
                 child: CircularProgressIndicator(
                 color: ColorsManager.orange,
               ))
@@ -78,13 +79,15 @@ class _HomeState extends State<Home> {
                         fit: BoxFit.fill,
                         image: CachedNetworkImageProvider(homeTabViewModel
                                 .availableMoviesList.isNotEmpty
-                            ? homeTabViewModel.availableMoviesList[_selectedIndex].largeCoverImage
+                            ? homeTabViewModel
+                                .availableMoviesList[_selectedIndex]
+                                .largeCoverImage
                             : 'https://n-lightenment.com/wp-content/uploads/2015/10/movie-night11.jpg')),
                   ),
                 ),
                 SafeArea(
                   child: CustomScrollView(
-                    physics: BouncingScrollPhysics(),
+                    physics: const BouncingScrollPhysics(),
                     slivers: [
                       SliverToBoxAdapter(
                         child: Image.asset(
@@ -140,7 +143,9 @@ class _HomeState extends State<Home> {
                                 onTap: () {
                                   setState(() {
                                     isMoreTapped = !isMoreTapped;
-                                    toggleLabel = isMoreTapped ? 'See Less' : 'See More  ->';
+                                    toggleLabel = isMoreTapped
+                                        ? 'See Less'
+                                        : 'See More  ->';
                                   });
                                 },
                                 child: Text(
@@ -157,17 +162,19 @@ class _HomeState extends State<Home> {
                           ? SliverToBoxAdapter(
                               child: GridView.builder(
                                 padding: REdgeInsets.symmetric(horizontal: 8),
-                                physics: NeverScrollableScrollPhysics(),
+                                physics: const NeverScrollableScrollPhysics(),
                                 shrinkWrap: true,
                                 itemCount: viewModel.genreMoviesList.length,
-                                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                gridDelegate:
+                                    SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 3,
                                   mainAxisSpacing: 8.h,
                                   crossAxisSpacing: 8.w,
                                   childAspectRatio: 0.6,
                                 ),
                                 itemBuilder: (context, index) => MovieCard(
-                                  movieDataModel: viewModel.genreMoviesList[index],
+                                  movieDataModel:
+                                      viewModel.genreMoviesList[index],
                                 ),
                               ),
                             )
@@ -175,18 +182,21 @@ class _HomeState extends State<Home> {
                               child: SizedBox(
                                 height: 220,
                                 child: ListView.separated(
-                                  physics: BouncingScrollPhysics(),
+                                  physics: const BouncingScrollPhysics(),
                                   padding: REdgeInsets.symmetric(horizontal: 8),
                                   scrollDirection: Axis.horizontal,
-                                  separatorBuilder: (context, index) => SizedBox(width: 16.w),
-                                  itemCount: viewModel.genreMoviesList.length > 10
-                                      ? 10
-                                      : viewModel.genreMoviesList.length,
+                                  separatorBuilder: (context, index) =>
+                                      SizedBox(width: 16.w),
+                                  itemCount:
+                                      viewModel.genreMoviesList.length > 10
+                                          ? 10
+                                          : viewModel.genreMoviesList.length,
                                   itemBuilder: (context, index) => SizedBox(
                                     height: 220.h,
                                     width: 146.w,
                                     child: MovieCard(
-                                      movieDataModel: viewModel.genreMoviesList[index],
+                                      movieDataModel:
+                                          viewModel.genreMoviesList[index],
                                     ),
                                   ),
                                 ),

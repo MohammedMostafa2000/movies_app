@@ -18,7 +18,12 @@ class MainlayoutView extends StatefulWidget {
 
 class _MainlayoutViewState extends State<MainlayoutView> {
   int selectedIndex = 0;
-  final List<Widget> tabs = [Home(), Search(), Browse(), Profile()];
+  final List<Widget> tabs = [
+    const Home(),
+    const Search(),
+    const Browse(),
+    const Profile()
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -43,8 +48,9 @@ class _MainlayoutViewState extends State<MainlayoutView> {
                   });
                 },
                 iconSize: 30.sp,
-                items: [
-                  BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: ''),
+                items: const [
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.home_filled), label: ''),
                   BottomNavigationBarItem(icon: Icon(Icons.search), label: ''),
                   BottomNavigationBarItem(icon: Icon(Icons.explore), label: ''),
                   BottomNavigationBarItem(icon: Icon(Icons.person), label: ''),

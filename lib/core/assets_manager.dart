@@ -17,5 +17,4 @@ class AssetsManager {
   static const String avatar7 = 'assets/images/avatar7.png';
   static const String avatar8 = 'assets/images/avatar8.png';
   static const String avatar9 = 'assets/images/avatar9.png';
-  
 }

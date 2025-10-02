@@ -69,21 +69,28 @@ class MovieDataModel {
 
   factory MovieDataModel.fromJson(Map<String, dynamic> json) {
     return MovieDataModel(
-      id: json['id'] ?? (json['movieId'] != null ? int.tryParse(json['movieId']) : null) ?? 0,
+      id: json['id'] ??
+          (json['movieId'] != null ? int.tryParse(json['movieId']) : null) ??
+          0,
       url: json['url'] ?? '',
       imdbCode: json['imdb_code'] ?? '',
       title: json['title'] ?? '',
       titleEnglish: json['title_english'] ?? '',
       titleLong: json['title_long'] ?? '',
       slug: json['slug'] ?? '',
-      year: json['year'] is int ? json['year'] : int.tryParse(json['year']?.toString() ?? '') ?? 0,
+      year: json['year'] is int
+          ? json['year']
+          : int.tryParse(json['year']?.toString() ?? '') ?? 0,
       rating: json['rating'] is num
           ? (json['rating'] as num).toDouble()
           : double.tryParse(json['rating']?.toString() ?? '') ?? 0.0,
       runtime: json['runtime'] is int
           ? json['runtime']
           : int.tryParse(json['runtime']?.toString() ?? '') ?? 0,
-      genres: (json['genres'] as List<dynamic>?)?.map((e) => e.toString()).toList() ?? [],
+      genres: (json['genres'] as List<dynamic>?)
+              ?.map((e) => e.toString())
+              .toList() ??
+          [],
       likeCount: json['like_count'] ?? 0,
       descriptionIntro: json['description_intro'] ?? '',
       descriptionFull: json['description_full'] ?? '',

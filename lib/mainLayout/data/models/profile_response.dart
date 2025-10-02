@@ -19,7 +19,8 @@ class ProfileResponse {
     if (rawData is Map<String, dynamic>) {
       parsedData = UserDataModel.fromJson(rawData);
     } else if (rawData is List) {
-      parsedData = rawData.map((item) => MovieDataModel.fromJson(item)).toList();
+      parsedData =
+          rawData.map((item) => MovieDataModel.fromJson(item)).toList();
     } else if (rawData is bool) {
       parsedData = rawData;
     }

@@ -98,24 +98,24 @@ class _RegisterState extends State<Register> {
                 CustomTextFormField(
                   controller: nameController,
                   keyboardType: TextInputType.name,
-                  prefixIcon: Icon(Icons.person),
+                  prefixIcon: const Icon(Icons.person),
                   hintText: 'Name',
                 ),
                 SizedBox(height: 20.h),
                 CustomTextFormField(
                   controller: emailController,
                   keyboardType: TextInputType.emailAddress,
-                  prefixIcon: Icon(Icons.email),
+                  prefixIcon: const Icon(Icons.email),
                   hintText: 'Email',
                 ),
                 SizedBox(height: 20.h),
                 CustomTextFormField(
                   controller: passwordController,
                   keyboardType: TextInputType.visiblePassword,
-                  prefixIcon: Icon(Icons.lock),
+                  prefixIcon: const Icon(Icons.lock),
                   hintText: 'Password',
                   suffixIcon: IconButton(
-                    icon: Icon(Icons.visibility_off),
+                    icon: const Icon(Icons.visibility_off),
                     onPressed: () {},
                   ),
                 ),
@@ -123,10 +123,10 @@ class _RegisterState extends State<Register> {
                 CustomTextFormField(
                   controller: confirmPasswordController,
                   keyboardType: TextInputType.visiblePassword,
-                  prefixIcon: Icon(Icons.lock),
+                  prefixIcon: const Icon(Icons.lock),
                   hintText: 'Confirm Password',
                   suffixIcon: IconButton(
-                    icon: Icon(Icons.visibility_off),
+                    icon: const Icon(Icons.visibility_off),
                     onPressed: () {},
                   ),
                 ),
@@ -134,7 +134,7 @@ class _RegisterState extends State<Register> {
                 CustomTextFormField(
                   controller: phoneNumberController,
                   keyboardType: TextInputType.phone,
-                  prefixIcon: Icon(Icons.phone),
+                  prefixIcon: const Icon(Icons.phone),
                   hintText: 'Phone Number',
                 ),
                 SizedBox(height: 20.h),
@@ -152,7 +152,10 @@ class _RegisterState extends State<Register> {
                   children: [
                     Text(
                       'Already Have Account ?   ',
-                      style: Theme.of(context).textTheme.bodySmall!.copyWith(fontSize: 14),
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodySmall!
+                          .copyWith(fontSize: 14),
                     ),
                     CustomTextButton(
                       onTap: () {
@@ -170,7 +173,8 @@ class _RegisterState extends State<Register> {
     );
   }
 
-  Future<void> _createAccount(BuildContext context, RegisterViewModel viewModel) async {
+  Future<void> _createAccount(
+      BuildContext context, RegisterViewModel viewModel) async {
     DialogUtils.showLoadingDialog("wait...", context);
 
     await viewModel.register(
@@ -184,13 +188,15 @@ class _RegisterState extends State<Register> {
     if (context.mounted) {
       DialogUtils.hideDialog(context);
       if (viewModel.message == 'User created successfully') {
-        DialogUtils.showDialogMessage(context, message: viewModel.message, posActionTitle: "Ok",
-            posAction: () {
+        DialogUtils.showDialogMessage(context,
+            message: viewModel.message, posActionTitle: "Ok", posAction: () {
           Navigator.pushReplacementNamed(context, RoutesManager.loginView);
         });
       } else {
         DialogUtils.showDialogMessage(context,
-            message: viewModel.message, negActionTitle: "Cancel", negAction: () {});
+            message: viewModel.message,
+            negActionTitle: "Cancel",
+            negAction: () {});
       }
     }
   }

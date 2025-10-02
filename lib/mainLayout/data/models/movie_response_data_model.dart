@@ -16,7 +16,8 @@ class MovieResponseDataModel {
       status: json['status'] as String,
       statusMessage: json['status_message'] as String,
       movies: (json['data']['movies'] as List)
-          .map((movie) => MovieDataModel.fromJson(movie as Map<String, dynamic>))
+          .map(
+              (movie) => MovieDataModel.fromJson(movie as Map<String, dynamic>))
           .toList(),
     );
   }

@@ -7,7 +7,7 @@ class SearchTabViewModel extends ChangeNotifier {
   String error = '';
 
   void getMoviesBySearch({String query = ''}) async {
-    var result = await ApiServices.getMovies(query: query,limit: 20);
+    var result = await ApiServices.getMovies(query: query, limit: 20);
     result.fold(
       (left) {
         moviesList = left;

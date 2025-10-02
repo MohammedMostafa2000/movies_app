@@ -25,4 +25,3 @@ class GenreWidget extends StatelessWidget {
     );
   }
 }
-

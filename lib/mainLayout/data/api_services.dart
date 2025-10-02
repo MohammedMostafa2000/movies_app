@@ -29,7 +29,8 @@ class ApiServices {
     }
   }
 
-  static Future<Either<MovieDataModel, String>> getMovieDetails({int movieId = 0}) async {
+  static Future<Either<MovieDataModel, String>> getMovieDetails(
+      {int movieId = 0}) async {
     try {
       final url = Uri.parse(
           'https://yts.mx/api/v2/movie_details.json?movie_id=$movieId&with_images=true&with_cast=true');
@@ -46,9 +47,11 @@ class ApiServices {
     }
   }
 
-  static Future<Either<List<MovieDataModel>, String>> getMovieSuggestions({int movieId = 0}) async {
+  static Future<Either<List<MovieDataModel>, String>> getMovieSuggestions(
+      {int movieId = 0}) async {
     try {
-      final url = Uri.parse('https://yts.mx/api/v2/movie_suggestions.json?movie_id=$movieId');
+      final url = Uri.parse(
+          'https://yts.mx/api/v2/movie_suggestions.json?movie_id=$movieId');
       var response = await http.get(url);
       if (response.statusCode == 200) {
         final json = jsonDecode(response.body);
@@ -62,7 +65,8 @@ class ApiServices {
     }
   }
 
-  static Future<ProfileResponse> getProfileDetails({required String token}) async {
+  static Future<ProfileResponse> getProfileDetails(
+      {required String token}) async {
     try {
       Uri url = Uri.parse('https://route-movie-apis.vercel.app/profile');
       final response = await http.get(
@@ -115,7 +119,8 @@ class ApiServices {
     required String movieId,
   }) async {
     try {
-      Uri url = Uri.parse('https://route-movie-apis.vercel.app/favorites/remove/$movieId');
+      Uri url = Uri.parse(
+          'https://route-movie-apis.vercel.app/favorites/remove/$movieId');
       final response = await http.delete(
         url,
         headers: {
@@ -129,7 +134,8 @@ class ApiServices {
     }
   }
 
-  static Future<ProfileResponse> getAllFavoriteMovies({required String token}) async {
+  static Future<ProfileResponse> getAllFavoriteMovies(
+      {required String token}) async {
     try {
       Uri url = Uri.parse('https://route-movie-apis.vercel.app/favorites/all');
       final response = await http.get(
@@ -150,7 +156,8 @@ class ApiServices {
     required int movieId,
   }) async {
     try {
-      Uri url = Uri.parse('https://route-movie-apis.vercel.app/favorites/is-favorite/$movieId');
+      Uri url = Uri.parse(
+          'https://route-movie-apis.vercel.app/favorites/is-favorite/$movieId');
       final response = await http.get(
         url,
         headers: {

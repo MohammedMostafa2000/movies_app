@@ -26,31 +26,33 @@ class _SearchState extends State<Search> {
     return Scaffold(
       body: Consumer<SearchTabViewModel>(
         builder: (context, viewModel, child) => SafeArea(
-          child: SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
-            child: Column(
-              children: [
-                Padding(
-                  padding: REdgeInsets.symmetric(horizontal: 8),
-                  child: TextFormField(
-                    cursorColor: ColorsManager.white,
-                    onChanged: (value) {
-                      setState(() {
-                        textFormFieldData = value;
-                        viewModel.getMoviesBySearch(query: value);
-                      });
-                    },
-                    style: Theme.of(context).textTheme.labelMedium!.copyWith(fontSize: 16),
-                    decoration: InputDecoration(
-                      hintText: 'Search',
-                      prefixIcon: Icon(Icons.search),
-                    ),
+          child: Column(
+            children: [
+              Padding(
+                padding: REdgeInsets.symmetric(horizontal: 8),
+                child: TextFormField(
+                  cursorColor: ColorsManager.white,
+                  onChanged: (value) {
+                    setState(() {
+                      textFormFieldData = value;
+                      viewModel.getMoviesBySearch(query: value);
+                    });
+                  },
+                  style: Theme.of(context)
+                      .textTheme
+                      .labelMedium!
+                      .copyWith(fontSize: 16),
+                  decoration: const InputDecoration(
+                    hintText: 'Search',
+                    prefixIcon: Icon(Icons.search),
                   ),
                 ),
-                SizedBox(height: 12.h),
-                textFormFieldData.isNotEmpty
+              ),
+              SizedBox(height: 12.h),
+              Expanded(
+                child: textFormFieldData.isNotEmpty
                     ? CustomGridViewBuilder(
-                      padding: REdgeInsets.symmetric(horizontal: 8),
+                        padding: REdgeInsets.symmetric(horizontal: 8),
                         count: viewModel.moviesList.length,
                         crossAxisCount: 2,
                         childAspectRatio: 0.7,
@@ -60,18 +62,14 @@ class _SearchState extends State<Search> {
                           );
                         },
                       )
-                    : SizedBox(
-                        height: 750.h,
-                        child: Center(
-                          child: Image.asset(
-                            AssetsManager.popcorn,
-                            height: 124.h,
-                          ),
+                    : Center(
+                        child: Image.asset(
+                          AssetsManager.popcorn,
+                          height: 124.h,
                         ),
                       ),
-                SizedBox(height: 20.h)
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

@@ -6,7 +6,7 @@ import 'package:movies_app/core/colors_manager.dart';
 class ThemeManager {
   static ThemeData light = ThemeData();
   static ThemeData dark = ThemeData(
-    appBarTheme: AppBarTheme(
+    appBarTheme: const AppBarTheme(
       centerTitle: true,
       foregroundColor: ColorsManager.orange,
       backgroundColor: ColorsManager.black121312,
@@ -42,20 +42,20 @@ class ThemeManager {
       filled: true,
       fillColor: ColorsManager.black282A28,
       border: OutlineInputBorder(
-        borderSide: BorderSide(color: ColorsManager.black282A28),
+        borderSide: const BorderSide(color: ColorsManager.black282A28),
         borderRadius: BorderRadius.circular(16.r),
       ),
       enabledBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: ColorsManager.black282A28),
+        borderSide: const BorderSide(color: ColorsManager.black282A28),
         borderRadius: BorderRadius.circular(16.r),
       ),
       focusedBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: ColorsManager.black282A28),
+        borderSide: const BorderSide(color: ColorsManager.black282A28),
         borderRadius: BorderRadius.circular(16.r),
       ),
     ),
     scaffoldBackgroundColor: ColorsManager.black121312,
-    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       showSelectedLabels: false,
       showUnselectedLabels: false,
       elevation: 0,

@@ -36,9 +36,7 @@ class ApiServices {
     }
   }
 
-
-
-   static Future<LoginResponse> login({
+  static Future<LoginResponse> login({
     required String email,
     required String password,
   }) async {
@@ -60,5 +58,4 @@ class ApiServices {
       return LoginResponse(message: e.toString());
     }
   }
-
 }

@@ -34,9 +34,11 @@ class _MovieDetailsViewState extends State<MovieDetailsView> {
   }
 
   loadMovieDetails() async {
-    movieDetailsViewModel = Provider.of<MovieDetailsViewModel>(context, listen: false);
+    movieDetailsViewModel =
+        Provider.of<MovieDetailsViewModel>(context, listen: false);
     token = await SharedPrefs.getToken();
-    movieDetailsViewModel.checkFavoriteMovies(movieId: widget.movieId, token: token);
+    movieDetailsViewModel.checkFavoriteMovies(
+        movieId: widget.movieId, token: token);
 
     movieDetailsViewModel.getMovieDetails(movieId: widget.movieId);
     movieDetailsViewModel.getMovieSuggestions(movieId: widget.movieId);
@@ -44,6 +46,7 @@ class _MovieDetailsViewState extends State<MovieDetailsView> {
 
   @override
   void dispose() {
+    movieDetailsViewModel.isLoading = true;
     super.dispose();
   }
 
@@ -55,7 +58,7 @@ class _MovieDetailsViewState extends State<MovieDetailsView> {
           builder: (context, viewModel, child) => viewModel.isLoading
               ? SizedBox(
                   height: 1000.h,
-                  child: Center(
+                  child: const Center(
                     child: CircularProgressIndicator(
                       color: ColorsManager.orange,
                     ),
@@ -70,7 +73,8 @@ class _MovieDetailsViewState extends State<MovieDetailsView> {
                         children: [
                           CachedNetworkImage(
                             imageUrl: viewModel.movie?.largeCoverImage ?? '',
-                            errorWidget: (context, url, error) => Icon(Icons.error),
+                            errorWidget: (context, url, error) =>
+                                const Icon(Icons.error),
                           ),
                           Container(
                             height: 645.h,
@@ -80,8 +84,10 @@ class _MovieDetailsViewState extends State<MovieDetailsView> {
                                 begin: Alignment.topCenter,
                                 end: Alignment.bottomCenter,
                                 colors: [
-                                  ColorsManager.black121312.withValues(alpha: 0.20),
-                                  ColorsManager.black121312.withValues(alpha: 1.00),
+                                  ColorsManager.black121312
+                                      .withValues(alpha: 0.20),
+                                  ColorsManager.black121312
+                                      .withValues(alpha: 1.00),
                                 ],
                               ),
                             ),
@@ -93,7 +99,8 @@ class _MovieDetailsViewState extends State<MovieDetailsView> {
                               children: [
                                 SafeArea(
                                   child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       IconButton(
                                         onPressed: () {
@@ -107,7 +114,8 @@ class _MovieDetailsViewState extends State<MovieDetailsView> {
                                       ),
                                       IconButton(
                                         onPressed: () async {
-                                          await viewModel.toggleFavoriteStatus(token: token);
+                                          await viewModel.toggleFavoriteStatus(
+                                              token: token);
                                         },
                                         icon: Icon(
                                           Icons.bookmark_outlined,
@@ -149,7 +157,7 @@ class _MovieDetailsViewState extends State<MovieDetailsView> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          CustomElevatedButton(
+                          const CustomElevatedButton(
                             color: ColorsManager.red,
                             title: 'Watch',
                           ),
@@ -159,7 +167,8 @@ class _MovieDetailsViewState extends State<MovieDetailsView> {
                             children: [
                               CustomStatisticsWidget(
                                 icon: Icons.favorite,
-                                text: viewModel.movie?.likeCount.toString() ?? '',
+                                text:
+                                    viewModel.movie?.likeCount.toString() ?? '',
                               ),
                               CustomStatisticsWidget(
                                 icon: Icons.watch_later_rounded,
@@ -172,70 +181,79 @@ class _MovieDetailsViewState extends State<MovieDetailsView> {
                             ],
                           ),
                           SizedBox(height: 16.h),
-                          CustomTitle(
+                          const CustomTitle(
                             title: 'Screen Shots',
                           ),
                           SizedBox(height: 16.h),
                           CustomScreenshotFrame(
-                            imageUrl: viewModel.movie?.largeScreenshotImage1 ?? '',
+                            imageUrl:
+                                viewModel.movie?.largeScreenshotImage1 ?? '',
                           ),
                           SizedBox(height: 12.h),
                           CustomScreenshotFrame(
-                            imageUrl: viewModel.movie?.largeScreenshotImage2 ?? '',
+                            imageUrl:
+                                viewModel.movie?.largeScreenshotImage2 ?? '',
                           ),
                           SizedBox(height: 12.h),
                           CustomScreenshotFrame(
-                            imageUrl: viewModel.movie?.largeScreenshotImage3 ?? '',
+                            imageUrl:
+                                viewModel.movie?.largeScreenshotImage3 ?? '',
                           ),
                           SizedBox(height: 16.h),
-                          CustomTitle(
+                          const CustomTitle(
                             title: 'Similar',
                           ),
                           SizedBox(height: 16.h),
                           viewModel.isMovieSuggestionsLoading
-                              ? Center(
+                              ? const Center(
                                   child: CircularProgressIndicator(
                                     color: ColorsManager.orange,
                                   ),
                                 )
                               : CustomGridViewBuilder(
+                                  physics: const NeverScrollableScrollPhysics(),
                                   padding: EdgeInsets.zero,
                                   count: viewModel.movieSuggestionsList.length,
                                   crossAxisCount: 2,
                                   childAspectRatio: 0.70,
                                   itemBuilder: (context, index) => MovieCard(
-                                    movieDataModel: viewModel.movieSuggestionsList[index],
+                                    movieDataModel:
+                                        viewModel.movieSuggestionsList[index],
                                   ),
                                 ),
                           SizedBox(height: 16.h),
-                          CustomTitle(
+                          const CustomTitle(
                             title: 'Summary',
                           ),
                           SizedBox(height: 16.h),
                           Text(
-                            (viewModel.movie?.descriptionFull.isNotEmpty == true)
+                            (viewModel.movie?.descriptionFull.isNotEmpty ==
+                                    true)
                                 ? viewModel.movie!.descriptionFull
-                                : (viewModel.movie?.descriptionIntro.isNotEmpty == true
+                                : (viewModel.movie?.descriptionIntro
+                                            .isNotEmpty ==
+                                        true
                                     ? viewModel.movie!.descriptionIntro
                                     : 'No Summary Available'),
                             style: Theme.of(context).textTheme.bodySmall,
                           ),
                           SizedBox(height: 16.h),
-                          CustomTitle(
+                          const CustomTitle(
                             title: 'Cast',
                           ),
                           SizedBox(height: 16.h),
                           ListView.separated(
-                            separatorBuilder: (context, index) => SizedBox(height: 8.h),
+                            separatorBuilder: (context, index) =>
+                                SizedBox(height: 8.h),
                             padding: EdgeInsets.zero,
                             shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
                             itemCount: viewModel.movie?.cast.length ?? 0,
-                            itemBuilder: (context, index) =>
-                                CastWidget(castDataModel: viewModel.movie!.cast[index]),
+                            itemBuilder: (context, index) => CastWidget(
+                                castDataModel: viewModel.movie!.cast[index]),
                           ),
                           SizedBox(height: 16.h),
-                          CustomTitle(
+                          const CustomTitle(
                             title: 'Genres',
                           ),
                           SizedBox(height: 16.h),
@@ -243,8 +261,9 @@ class _MovieDetailsViewState extends State<MovieDetailsView> {
                             padding: REdgeInsets.only(bottom: 40),
                             itemCount: viewModel.movie?.genres.length ?? 0,
                             shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
-                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            physics: const NeverScrollableScrollPhysics(),
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
                               mainAxisSpacing: 12.h,
                               crossAxisSpacing: 16.w,
                               crossAxisCount: 3,
@@ -275,8 +294,12 @@ class CustomScreenshotFrame extends StatelessWidget {
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(16.h),
-      child: Image.network(
-        imageUrl,
+      child: CachedNetworkImage(
+        errorWidget: (context, url, error) => const Icon(
+          Icons.error,
+          color: Colors.red,
+        ),
+        imageUrl: imageUrl,
         height: 168.h,
         fit: BoxFit.cover,
       ),

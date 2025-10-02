@@ -54,21 +54,21 @@ class _LoginState extends State<Login> {
                   SizedBox(height: 70.h),
                   CustomTextFormField(
                     controller: emailController,
-                    prefixIcon: Icon(Icons.email),
+                    prefixIcon: const Icon(Icons.email),
                     hintText: 'Email',
                   ),
                   SizedBox(height: 20.h),
                   CustomTextFormField(
                     controller: passwordController,
-                    prefixIcon: Icon(Icons.lock),
+                    prefixIcon: const Icon(Icons.lock),
                     hintText: 'Password',
                     suffixIcon: IconButton(
-                      icon: Icon(Icons.visibility_off),
+                      icon: const Icon(Icons.visibility_off),
                       onPressed: () {},
                     ),
                   ),
                   SizedBox(height: 18.h),
-                  Row(
+                  const Row(
                     children: [
                       Spacer(),
                       CustomTextButton(
@@ -91,11 +91,15 @@ class _LoginState extends State<Login> {
                     children: [
                       Text(
                         'Don’t Have Account ?   ',
-                        style: Theme.of(context).textTheme.bodySmall!.copyWith(fontSize: 14),
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodySmall!
+                            .copyWith(fontSize: 14),
                       ),
                       CustomTextButton(
                         onTap: () {
-                          Navigator.pushNamed(context, RoutesManager.registerView);
+                          Navigator.pushNamed(
+                              context, RoutesManager.registerView);
                         },
                         title: 'Create One',
                       ),
@@ -116,7 +120,10 @@ class _LoginState extends State<Login> {
                         color: ColorsManager.black121312,
                         child: Text(
                           'OR',
-                          style: Theme.of(context).textTheme.labelSmall!.copyWith(fontSize: 15.sp),
+                          style: Theme.of(context)
+                              .textTheme
+                              .labelSmall!
+                              .copyWith(fontSize: 15.sp),
                         ),
                       ),
                     ],
@@ -147,13 +154,15 @@ class _LoginState extends State<Login> {
     if (context.mounted) {
       DialogUtils.hideDialog(context);
       if (viewModel.message == 'Success Login') {
-        DialogUtils.showDialogMessage(context, message: viewModel.message, posActionTitle: "Ok",
-            posAction: () {
+        DialogUtils.showDialogMessage(context,
+            message: viewModel.message, posActionTitle: "Ok", posAction: () {
           Navigator.pushReplacementNamed(context, RoutesManager.mainLayoutView);
         });
       } else {
         DialogUtils.showDialogMessage(context,
-            message: viewModel.message, negActionTitle: "Cancel", negAction: () {});
+            message: viewModel.message,
+            negActionTitle: "Cancel",
+            negAction: () {});
       }
     }
   }

@@ -5,7 +5,7 @@ class MovieDetailsResponse {
   final String statusMessage;
   final MovieDataModel movie;
 
- MovieDetailsResponse({
+  MovieDetailsResponse({
     required this.status,
     required this.statusMessage,
     required this.movie,
@@ -13,9 +13,9 @@ class MovieDetailsResponse {
 
   factory MovieDetailsResponse.fromJson(Map<String, dynamic> json) {
     return MovieDetailsResponse(
-      status: json['status'] as String,
-      statusMessage: json['status_message'] as String,
-      movie:MovieDataModel.fromJson(json['data']['movie'] as Map<String,dynamic>)
-    );
+        status: json['status'] as String,
+        statusMessage: json['status_message'] as String,
+        movie: MovieDataModel.fromJson(
+            json['data']['movie'] as Map<String, dynamic>));
   }
 }

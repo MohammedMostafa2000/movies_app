@@ -17,7 +17,8 @@ class CastWidget extends StatelessWidget {
       alignment: Alignment.center,
       height: 92.h,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16.r), color: ColorsManager.black282A28),
+          borderRadius: BorderRadius.circular(16.r),
+          color: ColorsManager.black282A28),
       child: Row(
         children: [
           SizedBox(
@@ -26,7 +27,7 @@ class CastWidget extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20.r),
               child: CachedNetworkImage(
-                errorWidget: (context, url, error) => Icon(Icons.error),
+                errorWidget: (context, url, error) => const Icon(Icons.error),
                 imageUrl: castDataModel.urlSmallImage,
                 height: 70.h,
               ),

@@ -9,7 +9,8 @@ class BrowseTabViewModel extends ChangeNotifier {
 
   void getMoviesBasedOnGenre({String genre = '', int page = 1}) async {
     isLoading = true;
-    var result = await ApiServices.getMovies(genre: genre, limit: 20, page: page);
+    var result =
+        await ApiServices.getMovies(genre: genre, limit: 20, page: page);
     result.fold(
       (left) {
         genreMoviesList.addAll(left);

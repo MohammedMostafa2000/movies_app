@@ -16,7 +16,7 @@ void main() {
       ChangeNotifierProvider(create: (context) => LoginViewModel()),
       ChangeNotifierProvider(create: (context) => ProfileViewModel()),
     ],
-    child: MoviesApp(),
+    child: const MoviesApp(),
   ));
 }
 
@@ -32,8 +32,8 @@ class MoviesApp extends StatelessWidget {
       builder: (context, child) => MaterialApp(
         debugShowCheckedModeBanner: false,
         onGenerateRoute: RoutesManager.goRoute,
-        initialRoute: RoutesManager.mainLayoutView,
-        locale: Locale('en'),
+        initialRoute: RoutesManager.loginView,
+        locale: const Locale('en'),
         theme: ThemeManager.light,
         darkTheme: ThemeManager.dark,
         themeMode: ThemeMode.dark,

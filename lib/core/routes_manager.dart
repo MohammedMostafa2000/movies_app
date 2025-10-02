@@ -13,16 +13,17 @@ class RoutesManager {
   static Route<dynamic>? goRoute(RouteSettings settings) {
     switch (settings.name) {
       case mainLayoutView:
-        return MaterialPageRoute(builder: (context) => MainlayoutView());
+        return MaterialPageRoute(builder: (context) => const MainlayoutView());
       case movieDetailsView:
         return MaterialPageRoute(
           settings: settings,
-          builder: (context) => MovieDetailsView(movieId: settings.arguments as int),
+          builder: (context) =>
+              MovieDetailsView(movieId: settings.arguments as int),
         );
       case loginView:
-        return MaterialPageRoute(builder: (context) => Login());
+        return MaterialPageRoute(builder: (context) => const Login());
       case registerView:
-        return MaterialPageRoute(builder: (context) => Register());
+        return MaterialPageRoute(builder: (context) => const Register());
 
       default:
         return null;

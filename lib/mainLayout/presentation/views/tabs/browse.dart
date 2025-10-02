@@ -45,9 +45,11 @@ class _BrowseState extends State<Browse> {
   ScrollController scrollController = ScrollController();
   @override
   void initState() {
-    browseTabViewModel = Provider.of<BrowseTabViewModel>(context, listen: false);
+    browseTabViewModel =
+        Provider.of<BrowseTabViewModel>(context, listen: false);
     currentGenre = movieCategories[0];
-    browseTabViewModel.getMoviesBasedOnGenre(genre: currentGenre, page: pageNumber);
+    browseTabViewModel.getMoviesBasedOnGenre(
+        genre: currentGenre, page: pageNumber);
     scrollController.addListener(() {
       if (scrollController.position.atEdge &&
           scrollController.position.pixels != 0 &&
@@ -78,7 +80,7 @@ class _BrowseState extends State<Browse> {
               length: movieCategories.length,
               child: TabBar(
                 padding: REdgeInsets.symmetric(horizontal: 8),
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 onTap: (index) {
                   setState(() {
                     selectedIndex = index;
@@ -101,7 +103,9 @@ class _BrowseState extends State<Browse> {
                     return Container(
                       padding: REdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        color: isSelected ? ColorsManager.orange : Colors.transparent,
+                        color: isSelected
+                            ? ColorsManager.orange
+                            : Colors.transparent,
                         borderRadius: BorderRadius.circular(16.r),
                         border: Border.all(
                           color: ColorsManager.orange,
@@ -119,9 +123,11 @@ class _BrowseState extends State<Browse> {
             Expanded(
               child: Consumer<BrowseTabViewModel>(
                 builder: (context, viewModel, child) {
-                  if (viewModel.isLoading && viewModel.genreMoviesList.isEmpty) {
-                    return Center(
-                      child: CircularProgressIndicator(color: ColorsManager.orange),
+                  if (viewModel.isLoading &&
+                      viewModel.genreMoviesList.isEmpty) {
+                    return const Center(
+                      child: CircularProgressIndicator(
+                          color: ColorsManager.orange),
                     );
                   }
                   return CustomGridViewBuilder(

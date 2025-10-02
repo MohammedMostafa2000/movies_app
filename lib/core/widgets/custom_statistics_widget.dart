@@ -16,9 +16,10 @@ class CustomStatisticsWidget extends StatelessWidget {
       padding: REdgeInsets.symmetric(horizontal: 12),
       alignment: Alignment.center,
       height: 48.h,
-      width: 122.w,
+      width: 100.w,
       decoration: BoxDecoration(
-          color: ColorsManager.black282A28, borderRadius: BorderRadius.circular(16.r)),
+          color: ColorsManager.black282A28,
+          borderRadius: BorderRadius.circular(16.r)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
