@@ -28,6 +28,8 @@ class MoviesApp extends StatelessWidget {
     return ScreenUtilInit(
       designSize: Size(context.width, context.height),
       minTextAdapt: true,
+      ensureScreenSize: true,
+      useInheritedMediaQuery: true,
       splitScreenMode: true,
       builder: (context, child) => MaterialApp(
         debugShowCheckedModeBanner: false,
